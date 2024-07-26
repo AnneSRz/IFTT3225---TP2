@@ -1,0 +1,25 @@
+{
+  "name": "iftt3225---tp2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startAll": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon backend/src/index.js",
+    "client": "live-server frontend/src/index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.1.4"
+  }
+}
