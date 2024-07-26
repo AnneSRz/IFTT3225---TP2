@@ -64,14 +64,14 @@
 
     ### Prepare the React dependencies :
       *In console, change directory to the app.* <br>
-      `npm i ` <br>
+      `npm i vite` <br>
       Will allow for better UI/UX experience and modularity. <br>
 
 
 
   2. Development dependencies :  <br>
     *In console, change directory to the app.* <br>
-    `npm i --save-dev dotenv nodemon live-server`  <br>
+    `npm i --save-dev dotenv nodemon`  <br>
     Will add Dotenv to manage environement variables.  <br>
     Will add Nodemon to refresh the server automatically while applying changes. <br>
     Will add content in node_modules, package-lock.json and also update package.json. <br>
@@ -86,7 +86,7 @@
     *In package.json, add the following lines in the script list:* <br>
     `"startAll": "concurrently \"npm run server\" \"npm run client\"",` <br>
     `"server": "nodemon backend/src/index.js",` <br>
-    `"client": "live-server frontend/src/index.html"` <br>
+    `"client": "vite frontend/src/"` <br>
 
 
 
