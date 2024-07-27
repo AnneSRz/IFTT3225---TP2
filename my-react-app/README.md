@@ -37,6 +37,19 @@
       Will add package.json.  <br>
 
 
+    ## FrontEnd Dependencies:
+
+    ### Prepare the React dependencies :
+      *In console, change directory to the app.* <br>
+      `npm i vite` <br>
+      Will allow for live viewing and refreshing of our react app. <br>
+
+    ### Prepare the React dependencies :
+      *In console, change directory to the app.* <br>
+      `npm create vite@latest my-react-app --template react` <br>
+      Will allow for better UI/UX experience and modularity. We are really just interested in setting up a react app rapidly. <br>
+
+
     ## Backend Dependencies:
 
     ### Prepare the Express.js dependencies : 
@@ -60,12 +73,6 @@
       Will allow better scripting in package.json <br>
 
 
-    ## FrontEnd Dependencies:
-
-    ### Prepare the React dependencies :
-      *In console, change directory to the app.* <br>
-      `npm i vite` <br>
-      Will allow for better UI/UX experience and modularity. <br>
 
 
 
