@@ -13,24 +13,13 @@ function App() {
 
   return (
     <>
-    <div className="container-fluid bg-success min-vh-100 d-flex flex-column" style ={{ backgroundColor: 'FFFFFF' }}>
-      
-      {/* The header */}
-      <div className="row">
+    <div className="d-flex flex-column min-vh-100" style ={{ backgroundColor: '#FDFDD2' }}>
         <HeaderComponent/>
-      </div>
-
-      {/* The body */}
-      <div className="h-100 bg-danger">
-        <BodyComponent/>
-      </div>
-
-      {/* The footer */}
-      <div>
+        <div className = 'flex-grow-1'>
+          <BodyComponent/>
+        </div>
         <FooterComponent/>
-      </div>
     </div>
-
     </>
   );
 }

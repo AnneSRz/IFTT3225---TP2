@@ -71,7 +71,7 @@ const LoginFormComponent = () => {
             onMouseLeave={() => setIsHovered(false)} 
             >
                 <FaUser />
-                <h2>Se connecter</h2>
+                <h3>Se connecter</h3>
             </div>
 
             {/* Conditional rendering of the overlay */}
@@ -80,7 +80,7 @@ const LoginFormComponent = () => {
                     <div className="modal-dialog">
                         <div className="modal-content"> 
 
-                            <div className="modal-header"> {/* login, register, x buttons */}
+                            <div className="modal-header" style={{ margin: '0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}> {/* login, register, x buttons */}
                                 <h5 
                                 className="modal-title" 
                                 onClick={registerFormOff}

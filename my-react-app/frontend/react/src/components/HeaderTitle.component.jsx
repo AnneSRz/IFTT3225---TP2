@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 export const HeaderTitleComponent = () => {
-    
   return (
-    <h2> Sucré et Salé</h2>
-  )
+    <>
+      <h2 >Sucré et Salé</h2>
+    </>
+  );
 }
 
-export default HeaderTitleComponent
+export default HeaderTitleComponent;

@@ -1,6 +1,6 @@
 .tuileRecette{
-  border-style: solid;
-  background-color: white;
-  border-radius: 5px;
-  display: inline-block;
+  border-style: solid !important;
+  background-color: white !important;
+  border-radius: 5px !important;
+  display: inline-block !important;
 }

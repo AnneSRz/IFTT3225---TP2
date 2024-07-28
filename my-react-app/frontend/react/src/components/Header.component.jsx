@@ -6,9 +6,9 @@ import LoginFormComponent from './LoginForm.component'
 
 export default function HeaderComponent() {
   return (
-    <div className="page-header d-flex justify-content-between align-items-center px-3 py-1" style={{ backgroundColor: '#FDFDD2' }}>
-        <HeaderTitleComponent/>
-        <LoginFormComponent/>
+    <div className="d-flex justify-content-between align-items-center px-3 py-1" style={{ backgroundColor: 'white', width: '100%' }}>
+      <HeaderTitleComponent/>
+      <LoginFormComponent/>
     </div>
   )
 }
