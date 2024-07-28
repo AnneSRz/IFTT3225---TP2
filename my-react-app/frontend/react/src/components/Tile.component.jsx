@@ -47,7 +47,6 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
   };
 
   const handleSaveClick = () => {
-    // Vous pouvez ajouter la fonction onUpdateRecipe ici si nécessaire
     setEditOverlay(false);
   };
 
@@ -77,50 +76,34 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
 
         {/* On met les infos pertinent de la recette ici */}
         <div className="titre-recette" data-toggle="modal" data-target="#tuileRecetteModal" onClick={handleInfoClick}>
-          {/* Sur la tuile:
-          -Titre
-          -Image
-          -Categories
-          -Temps preparation
-          */}
-          <img src={recipe.image} alt="Image de la recette" className="image-tuile" />
+          <h4 className="mt-3 mb-2 nom-tuile">{recipe.title}</h4>
+          <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" />
           <div className="mt-3">
-            <h4 className="mt-3 mb-2 nom-tuile">{recipe.title}</h4>
             <p className="prep-tuile">
               <strong>Temps de préparation:</strong> {recipe.preparationTime} min
             </p>
             <p className="type-tuile">
-              <strong>Type : </strong> {recipe.tags}
+              <strong>Type : </strong> {recipe.tags.join(', ')}
             </p>
           </div>
         </div>
       </div>
-      
+
       {/* Afficher les informations de la recette lorsque l'user clique sur la tuile */}
       {showInfoOverlay && (
         <div className="modal fade show" id="tuileRecetteModal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              {/* Header de info overlay:
-              -Bouton x
-              -Texte generique
-              */}
+              {/* Header de info overlay */}
               <div className="modal-header">
                 <h5 className="modal-title" id="tuileRecetteModal">Détails de la recette</h5>
                 <button type="button" className="close" aria-label="Close" onClick={handleCloseClick}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              {/* Body de info overlay:
-              -Image
-              -Titre
-              -Temps preparation
-              -Temps cuisson
-              -Categories
-              -Description
-              */}
+              {/* Body de info overlay */}
               <div className="modal-body">
-                <img src={recipe.image} alt="Image de la recette" className="image-tuile" />
+                <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" />
                 <h4 className="mt-3 mb-2 nom-tuile">{recipe.title}</h4>
                 <p className="prep-tuile">
                   <strong>Temps de préparation:</strong> {recipe.preparationTime} min
@@ -129,7 +112,7 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
                   <strong>Temps de Cuisson:</strong> {recipe.cookingTime} min
                 </p>
                 <p className="type-tuile">
-                  <strong>Type : </strong> {recipe.tags}
+                  <strong>Type : </strong> {recipe.tags.join(', ')}
                 </p>
                 <p className="description-fiche">{recipe.description}</p>
               </div>
@@ -150,6 +133,7 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
                 </button>
               </div>
               <div className="modal-body">
+
                 {/* Formulaire pour modifier les infos de la recette */}
                 <form>
                   <div className="form-group">
@@ -166,7 +150,7 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="type">Type</label>
-                    <select className="form-control" id="type" name="tags" value={editedRecipe.tags} onChange={handleInputChange}>
+                    <select className="form-control" id="type" name="tags" value={editedRecipe.tags.join(', ')} onChange={handleInputChange}>
                       <option value="Végétarien">Végétarien</option>
                       <option value="Végétalien">Végétalien</option>
                       <option value="Poulet">Poulet</option>
@@ -177,7 +161,7 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="description">Étape de la recette</label>
-                    <textarea type="text" className="form-control" id="description" name="description" value={editedRecipe.description} onChange={handleInputChange} />
+                    <textarea className="form-control" id="description" name="description" value={editedRecipe.description} onChange={handleInputChange} />
                   </div>
                 </form>
               </div>

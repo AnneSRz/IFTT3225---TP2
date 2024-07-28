@@ -16,22 +16,32 @@ export default function BodyComponent() {
         preparationTime
         tags
     */
-    const [recipes, setRecipes] = useState([
-        { id: 1, title: 'yummy food', cookingTime: '12h', preparationTime: "1s", tags: ["poulet", "friture"] },
-    ]);
+    const [recipes, setRecipes] = useState([]);
 
     const [del, setDel] = useState(false);
 
+    //Aller chercher les recettes dans la database
+    useEffect(() => {
+        fetch('https://localhost:3000/recettes')
+        .then(response => response.json())
+        .then(data => setRecipes(data))
+        .catch(error => console.error('Les recettes n<ont pas pu être obtenues', error));
+    },
+    []);
+
+
     useEffect(() => {
         if (del) {
-            fetch('https://localhost:3000/recette/' + del, { method: 'DELETE' })
-                .then(rep => rep.json())
+            fetch('https://localhost:3000/recettes' + del, { method: 'DELETE' })
+                .then(response => response.json())
                 .then(() => {
                     setRecipes(recipes.filter(recipe => recipe.id !== del));
-                    setDel(false);
-                });
+                    setDel(null);
+                })
+                .catch(error => console.error('La recette na pas pu être supprimé', error));
         }
     }, [del, recipes]);
+
 
     const handleDeleteRecipe = (recipeToDelete) => {
         setDel(recipeToDelete.id);
