@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 
-const TileComponent = ({ recipe, onUpdateRecipe, onDeleteRecipe }) => {
+const TileComponent = ({ recipe, onDeleteRecipe }) => {
   /* keys from the recipe parameter (JSON)
       title
       recipeImagesURL
@@ -43,11 +43,11 @@ const TileComponent = ({ recipe, onUpdateRecipe, onDeleteRecipe }) => {
   // Pour changer les infos d'une recette. 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditedRecipe({  });
+    setEditedRecipe({ ...editedRecipe, [name]: value });
   };
 
   const handleSaveClick = () => {
-    onUpdateRecipe(editedRecipe);
+    // Vous pouvez ajouter la fonction onUpdateRecipe ici si nécessaire
     setEditOverlay(false);
   };
 
@@ -75,7 +75,6 @@ const TileComponent = ({ recipe, onUpdateRecipe, onDeleteRecipe }) => {
           <FaRegTrashAlt onClick={handleDeleteClick} />
         </div>
 
-        
         {/* On met les infos pertinent de la recette ici */}
         <div className="titre-recette" data-toggle="modal" data-target="#tuileRecetteModal" onClick={handleInfoClick}>
           {/* Sur la tuile:
