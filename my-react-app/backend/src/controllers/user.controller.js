@@ -1,4 +1,7 @@
 const User = require('../models/user.model'); // Assuming user.model.js exports the User model
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 class UserController {
     welcomeMessage(req, res, next) {
@@ -52,10 +55,13 @@ class UserController {
                 return;
             }
 
+            // Hash the password
+            const hashedPassword = await bcrypt.hash(password, 10);
+
             const newUser = new User({
                 username,
                 email,
-                password,
+                password:hashedPassword,
                 fullName,
                 bio,
                 age,

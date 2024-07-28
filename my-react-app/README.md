@@ -7,9 +7,9 @@
   - Create an API (Rest) to query the database with the essential CRUD features.
 
 
-  ## Setting up the recipe after cloning
+  ## Setting up the project after cloning
 
-  *If you've just cloned the recipe, you can simply install the dependencies to get started :* <br>
+  *If you've just cloned the project, you can simply install the dependencies to get started :* <br>
 
   1. Install dependencies stored in package.json. The following command will create and add content in node_modules, make sure you are in the backend directory and use the console to type :<br>
   `npm install ` 
@@ -19,7 +19,7 @@
 
 
 
-  ## Setting up the recipe for the first time
+  ## Setting up the project for the first time
 
   0. Files : <br>
     *Create index.js* <br>
@@ -66,6 +66,16 @@
       *In console, change directory to the app.* <br>
       `npm i mongodb` <br>
       Will add content in node_modules, package-lock.json and also update package.json. <br>
+
+    ### Prepare the mongoose-unique-validator dependencies :
+      *In console, change directory to the app.* <br>
+      `npm i mongoose-unique-validator` <br>
+      Will enhance mongoose. <br>
+
+    ### Prepare the bcrypt dependencies :
+      *In console, change directory to the app.* <br>
+      `npm i bcrypt` <br>
+      Will allow encryption of data. <br>
 
     ### Prepare the concurrently dependencies :
       *In console, change directory to the app.* <br>

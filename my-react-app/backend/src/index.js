@@ -6,6 +6,7 @@ const express = require('express');
 const userRoute = require('./routes/user.route');
 const recipeRoute = require('./routes/recipe.route');
 const categoryRoute = require('./routes/category.route');
+const authenticationRoute = require('./routes/authentication.route');
 // middleware
 const responseLogger = require('./middleware/res_logger.middleware');
 
@@ -32,6 +33,7 @@ app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies
 app.use(responseLogger); // will print the return values in the console
 
 // Routers
+app.use('/auth', authenticationRoute );
 app.use('/api/user', userRoute);
 app.use('/api/recipe', recipeRoute);
 app.use('/api/category', categoryRoute);

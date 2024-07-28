@@ -1,7 +1,16 @@
 const express = require('express');
 const UserController = require('../controllers/user.controller');
+const AuthenticationController = require('../controllers/authentication.controller');
+
+
 
 const router = express.Router();
+
+
+
+// Apply the authentication middleware to all routes
+router.use(AuthenticationController.verifyToken);
+
 
 
 // Route: GET all users
