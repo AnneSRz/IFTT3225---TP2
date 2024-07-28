@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from '../App';
 // icons
 import { FaUser } from "react-icons/fa";
 
@@ -7,10 +8,12 @@ const LoginFormComponent = () => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
-    // hooks for data
+    // hooks for user data
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    //is user connected
+    const {token} = useAuth();
 
     // Overlay methods to open/close the form
     const handleLoginClick = () => {
@@ -28,26 +31,20 @@ const LoginFormComponent = () => {
     };
 
 
-    const handleRegisterSubmit = (e) => {
-        e.preventDefault();
-        // TODO: Send an HTTP request to the server with email, username, and password
-        console.log('Email:', email);
-        console.log('Username:', username);
-        console.log('Password:', password);
-    };
-
-
 
     //submit for login
     const handleSubmitLogin = (e) => {
         e.preventDefault();
-        if (username.match(/^[a-zA-Z0-9_]{3,16}$/) && //Ensures the username is 3-16 characters long and contains only letters, numbers, and underscores.
+        if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && //Ensures the username is 3-16 characters long and contains only letters, numbers, and underscores.
             password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) { //Requires a password to be at least 8 characters long, containing at least one letter and one number.
+                console.log('Email:', email);
+                console.log('Password:', password);
+                
                 //fetch for login
                 fetch('http://localhost:3000/auth/login', {
                     method: 'POST', //POST because of sensitive data handling
                     headers: {'Content-Type': 'application/json',},
-                    body: JSON.stringify({ email, password }),
+                    body: JSON.stringify({ "email":String(email), "password":String(password) }),
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -57,6 +54,8 @@ const LoginFormComponent = () => {
                 })
                 .then(data => {
                     console.log('Login successful:', data); //data stores the token
+                    const { setToken } = useAuth();
+                    setToken(data)
                 })
                 .catch(error => {
                     console.error('Error logging in:', error);
@@ -117,6 +116,11 @@ const LoginFormComponent = () => {
 
     // html
     return (
+        <>
+        {/*If connected say welcome*/}
+        {token && (<h1 className="col-2 m-0 rounded border-0">Welcome</h1>)}
+        {/*If not, display connection button*/}
+        {!token && (
         //navbar element
         <div className="col-2 m-0 rounded border-0" >
             <div className="" // This div is responsible for the hover and overlay toggle
@@ -155,13 +159,13 @@ const LoginFormComponent = () => {
                                 {showOverlay && !showRegister && (
                                     <form id="login" onSubmit={handleSubmitLogin}>
                                         <div className="form-group">
-                                            <label htmlFor="username">Nom d'utilisateur</label>
+                                            <label htmlFor="email">Courriel</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                id="username"
-                                                value={username}
-                                                onChange={(e) => setUsername(e.target.value)}
+                                                id="email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
                                             />
                                         </div>
                                         <div className="form-group">
@@ -221,7 +225,9 @@ const LoginFormComponent = () => {
                 </div>
             )}
         </div>
-    );
-};
+    )}
+    </>
+    )
+}
 
 export default LoginFormComponent;
