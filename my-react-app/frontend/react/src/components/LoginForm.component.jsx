@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useAuth } from '../App';
+import React, { createContext, useState, useContext } from 'react';
+import { AuthContext } from '../App';
 // icons
 import { FaUser } from "react-icons/fa";
 
@@ -13,8 +13,8 @@ const LoginFormComponent = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     //is user connected
-    const {token} = useAuth();
-
+    const { token } = useContext(AuthContext);
+    const { setToken } = useContext(AuthContext);
     // Overlay methods to open/close the form
     const handleLoginClick = () => {
         setShowOverlay(true);
@@ -37,8 +37,8 @@ const LoginFormComponent = () => {
         e.preventDefault();
         if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && //Ensures the username is 3-16 characters long and contains only letters, numbers, and underscores.
             password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) { //Requires a password to be at least 8 characters long, containing at least one letter and one number.
-                console.log('Email:', email);
-                console.log('Password:', password);
+                //console.log('Email:', email);
+                //console.log('Password:', password);
                 
                 //fetch for login
                 fetch('http://localhost:3000/auth/login', {
@@ -54,7 +54,6 @@ const LoginFormComponent = () => {
                 })
                 .then(data => {
                     console.log('Login successful:', data); //data stores the token
-                    const { setToken } = useAuth();
                     setToken(data)
                 })
                 .catch(error => {
@@ -118,7 +117,7 @@ const LoginFormComponent = () => {
     return (
         <>
         {/*If connected say welcome*/}
-        {token && (<h1 className="col-2 m-0 rounded border-0">Welcome</h1>)}
+        {token && (<h3 className="col-2 m-0 rounded border-0">Bienvenue :D</h3>)}
         {/*If not, display connection button*/}
         {!token && (
         //navbar element

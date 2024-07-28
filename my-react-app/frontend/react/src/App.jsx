@@ -25,7 +25,7 @@ export default App
 
 
 
-
+//react context 
 const AuthContext = createContext();
 // Wraps around the app so we can store / access the authentication token
 export const AuthProvider = ({ children }) => {
@@ -38,15 +38,5 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-
-//the link between AuthProvider and useAuth() is made through AuthContext
-//  context = object with properties  Provider (emitter) and Consumer (subscriber)
-export const useAuth = () => useContext(AuthContext);// useContext: It subscribes the component to the context
-/*
-How to use useAuth() : 
-
-    const { token } = useAuth(); this deconstructs the token from userAuth() so we can access the token
-
-    const { setToken } = useAuth(); this deconstructs the setToken method so we can change it when needed
-
-*/
+export {AuthContext}
+//we can access the token and the setToken method by deconstructuring with     const { token } = useContext(AuthContext);
