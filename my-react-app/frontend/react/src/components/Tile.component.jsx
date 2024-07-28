@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 const TileComponent = () => {
   
+  
   const [recipe, setRecipe] = useState(false);
-  const [showEditOverlay, setShowOverlay] = useState(false);
-
+  const [showEditOverlay, setEditOverlay] = useState(false);
+  const [showDeleteOverlay, setDeleteOverlay] = useState(false);
   /* keys JSON table recipe
         title
         recipeImagesURL
@@ -17,6 +18,24 @@ const TileComponent = () => {
         preparationTime
         tags
 */
+
+
+
+/* Handling opening and closing overlays */
+const handleCloseClick = () => {
+  setEditOverlay(false);
+  setDeleteOverlay(false);
+};
+
+const handleEditClick = () => {
+  setEditOverlay(true);
+};
+
+const handleDeleteClick = () => {
+  setDeleteOverlay(true);
+};
+
+
 
   return (
 
