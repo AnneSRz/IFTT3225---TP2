@@ -30,7 +30,8 @@ class RecipeController {
     async  createRecipe(req, res) {
         try {
             // Destructure the properties from the request body
-            const { title, recipeImagesURL, author, createdAt,description,ingredients,portions,cookingTime,preparationTime,tags } = req.body;
+            console.log(req.body)
+            const { title, recipeImagesURL, author, createdAt,description,ingredients,portions,cookingTime,preparationTime,category } = req.body;
             // Create the document
             const newRecipe = new Recipe({
                 title, 
@@ -42,7 +43,7 @@ class RecipeController {
                 portions,
                 cookingTime,
                 preparationTime,
-                tags
+                category
             });
             const savedRecipe = await newRecipe.save();
             res.status(201).json(savedRecipe);

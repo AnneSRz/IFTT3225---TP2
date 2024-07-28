@@ -178,7 +178,7 @@ const TileComponent = ({ recipe, onUpdateRecipe, onDeleteRecipe }) => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="description">Étape de la recette</label>
-                    <input type="text" className="form-control" id="description" name="description" value={editedRecipe.description} onChange={handleInputChange} />
+                    <textarea type="text" className="form-control" id="description" name="description" value={editedRecipe.description} onChange={handleInputChange} />
                   </div>
                 </form>
               </div>
