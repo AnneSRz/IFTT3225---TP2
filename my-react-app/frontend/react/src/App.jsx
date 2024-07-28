@@ -6,25 +6,33 @@ import viteLogo from '/vite.svg'
 import './css/App.css'
 //components
 import HeaderComponent from './components/Header.component';
-
+import BodyComponent from './components/Body.component';
+import FooterComponent from './components/Footer.component'
 
 function App() {
 
   return (
     <>
-      <div className='container min-vw-100 min-vh-100 bg-danger p-0 mx-auto'>
+    <div className="container-fluid bg-success min-vh-100 d-flex flex-column" style ={{ backgroundColor: 'FFFFFF' }}>
+      
+      {/* The header */}
+      <div className="row">
         <HeaderComponent/>
-
       </div>
+
+      {/* The body */}
+      <div className="h-100 bg-danger">
+        <BodyComponent/>
+      </div>
+
+      {/* The footer */}
+      <div>
+        <FooterComponent/>
+      </div>
+    </div>
+
     </>
-  )
+  );
 }
 
 export default App
-
-
-//This is where we will do the layout of the app and will be composed of larger components like :
-
-//The header
-//The body
-//The footer if needed
