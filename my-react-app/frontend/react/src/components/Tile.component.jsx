@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 const TileComponent = () => {
   
   const [recipe, setRecipe] = useState(false);
+  const [showEditOverlay, setShowOverlay] = useState(false);
+
   /* keys JSON table recipe
         title
         recipeImagesURL
