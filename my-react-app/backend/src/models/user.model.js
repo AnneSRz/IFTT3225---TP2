@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator')
 const { Schema } = mongoose;
 
 // Define the Mongoose schema for User
@@ -65,5 +66,6 @@ const userSchema = new Schema({
 });
 
 // Define and export the Mongoose model for User
+userSchema.plugin(uniqueValidator)
 const User = mongoose.model('User', userSchema);
 module.exports = User;
