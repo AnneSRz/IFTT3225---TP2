@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const express = require('express');
+const cors = require('cors');
 // routes
 const userRoute = require('./routes/user.route');
 const recipeRoute = require('./routes/recipe.route');
@@ -15,7 +16,13 @@ dotenv.config();
 //npm 
 //
 //
+const corsOptions = {
+  origin: true, // all addresses for now
+  optionsSuccessStatus: 200
+};
+//
 const app = express();
+app.use(cors(corsOptions));
 const port = process.env.PORT || "3000";
 
 // Connect to MongoDB

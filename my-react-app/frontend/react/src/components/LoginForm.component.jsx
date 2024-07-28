@@ -27,9 +27,6 @@ const LoginFormComponent = () => {
         setShowRegister(true);
     };
 
-    const registerFormOff = () => {
-        setShowRegister(false);
-    };
 
     const handleRegisterSubmit = (e) => {
         e.preventDefault();
@@ -39,13 +36,32 @@ const LoginFormComponent = () => {
         console.log('Password:', password);
     };
 
-    const handleSubmit = (e) => {
+
+
+    //submit for login
+    const handleSubmitLogin = (e) => {
         e.preventDefault();
         if (username.match(/^[a-zA-Z0-9_]{3,16}$/) && //Ensures the username is 3-16 characters long and contains only letters, numbers, and underscores.
             password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) { //Requires a password to be at least 8 characters long, containing at least one letter and one number.
-            
-                //TODO : Style the inputs with bg-success
-                // TODO: Send an HTTP request to the server with username and password
+                //fetch for login
+                fetch('http://localhost:3000/auth/login', {
+                    method: 'POST', //POST because of sensitive data handling
+                    headers: {'Content-Type': 'application/json',},
+                    body: JSON.stringify({ email, password }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => { throw new Error(text); });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Login successful:', data); //data stores the token
+                })
+                .catch(error => {
+                    console.error('Error logging in:', error);
+                });
+                //END
         } else {
 
              //TODO : Style the inputs with bg-danger
@@ -53,6 +69,45 @@ const LoginFormComponent = () => {
 
         }
     };
+
+
+    const handleSubmitSignup = (e) => {
+        e.preventDefault();
+        if (username.match(/^[a-zA-Z0-9_]{3,16}$/) && // 3-16 characters long with letters, numbers, and underscores
+            password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) && //min 8 characters long with min 1letter and 1number.
+            email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)){ //basic email regex 
+                //console.log(email)
+                //console.log(username)
+                //console.log(password)
+                //fetch for register
+                fetch('http://localhost:3000/auth/register', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json',},
+                    body: JSON.stringify({ "email":String(email), "username":String(username),"password":String(password) }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => { throw new Error(text); });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Registration successful:', data);
+                    // Handle successful registration (e.g., show a success message or redirect)
+                })
+                .catch(error => {
+                    console.error('Error registering user:', error);
+                });
+        }else {
+            //TODO : Style the inputs with bg-danger
+            console.error('Validation failed');
+               }
+    }
+
+
+
+
+
 
     // lazy hover button effect
     const triggerStyle = {
@@ -83,7 +138,7 @@ const LoginFormComponent = () => {
                             <div className="modal-header" style={{ margin: '0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}> {/* login, register, x buttons */}
                                 <h5 
                                 className="modal-title" 
-                                onClick={registerFormOff} 
+                                onClick={handleCloseClick} 
                                 //add hover style if we have enough time lol...I diiiid it
                                 >Se connecter</h5>
                                 <h5 
@@ -98,7 +153,7 @@ const LoginFormComponent = () => {
 
                                 {/* Login Form */}
                                 {showOverlay && !showRegister && (
-                                    <form id="login" onSubmit={handleSubmit}>
+                                    <form id="login" onSubmit={handleSubmitLogin}>
                                         <div className="form-group">
                                             <label htmlFor="username">Nom d'utilisateur</label>
                                             <input
@@ -125,7 +180,7 @@ const LoginFormComponent = () => {
 
                                 {/* Register Form */}
                                 {showOverlay && showRegister && (
-                                    <form id="register" onSubmit={handleRegisterSubmit}>
+                                    <form id="register" onSubmit={handleSubmitSignup}>
                                         <div className="form-group">
                                             <label htmlFor="email">Email</label>
                                             <input

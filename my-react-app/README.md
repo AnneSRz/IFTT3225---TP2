@@ -3,7 +3,7 @@
 
   ## Exigences 
 
-  - Authentification and encryption of user data
+  - Authentication and encryption of user data
   - Create an API (Rest) to query the database with the essential CRUD features.
 
 
@@ -77,6 +77,16 @@
       `npm i bcrypt` <br>
       Will allow encryption of data. <br>
 
+    ### Prepare the jsonwebtoken dependencies :
+      *In console, change directory to the app.* <br>
+      `npm i jsonwebtoken` <br>
+      Will allow encryption of data. <br>
+
+    ### Prepare the CORS dependencies :
+      *In console, change directory to the app.* <br>
+      `npm i cors` <br>
+      Will allow requests from our frontend. <br>
+
     ### Prepare the concurrently dependencies :
       *In console, change directory to the app.* <br>
       `npm i concurrently` <br>
@@ -108,7 +118,7 @@
 
 
 
-  ## Ressources used :
+  ## Ressources used (Backend) :
 
   - https://www.youtube.com/watch?v=P6RZfI8KDYc&list=PL_cUvD4qzbkwjmjy-KjbieZ8J9cGwxZpC "playlist tutorial"
   - https://www.youtube.com/watch?v=_7UQPve99r4 "1h30 tutorial"

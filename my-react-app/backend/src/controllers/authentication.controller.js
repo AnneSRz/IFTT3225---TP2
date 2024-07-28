@@ -69,7 +69,7 @@ exports.signup = async (req, res) => {
 };
 
 
-// Middleware to check authentication
+// Middleware to check Fcation
 exports.verifyToken = (req, res, next) => {
     const token = req.headers['authorization']?.split(' ')[1]; // Assuming Bearer token
 
