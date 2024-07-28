@@ -80,16 +80,16 @@ const LoginFormComponent = () => {
                     <div className="modal-dialog">
                         <div className="modal-content"> 
 
-                            <div className="modal-header" style={{ margin: '0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}> {/* login, register, x buttons */}
+                            <div className="modal-header" style={{ margin: '0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}> {/* login, register, x buttons */}
                                 <h5 
                                 className="modal-title" 
-                                onClick={registerFormOff}
-                                //add hover style if we have enough time lol
+                                onClick={registerFormOff} 
+                                //add hover style if we have enough time lol...I diiiid it
                                 >Se connecter</h5>
                                 <h5 
                                 className="modal-title"
                                 onClick={registerFormOn}
-                                //add hover style if we have enough time lol
+                                //add hover style if we have enough time lol...I diiiid it
                                 >S'inscrire</h5>
                                 <button type="button" className="bg-secondary" onClick={handleCloseClick}>x</button>
                             </div>
