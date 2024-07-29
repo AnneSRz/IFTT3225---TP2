@@ -36,7 +36,7 @@ class RecipeController {
             const newRecipe = new Recipe({
                 title, 
                 recipeImagesURL, 
-                author, 
+                author: req.user, 
                 createdAt,
                 description,
                 ingredients,

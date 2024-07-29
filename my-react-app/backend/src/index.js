@@ -10,6 +10,7 @@ const categoryRoute = require('./routes/category.route');
 const authenticationRoute = require('./routes/authentication.route');
 // middleware
 const responseLogger = require('./middleware/res_logger.middleware');
+const { authenticateToken } = require('./middleware/authenticator.middleware');
 
 dotenv.config();
 //
@@ -41,9 +42,10 @@ app.use(responseLogger); // will print the return values in the console
 
 // Routers
 app.use('/auth', authenticationRoute );
-app.use('/api/user', userRoute);
-app.use('/api/recipe', recipeRoute);
+app.use('/api/user',authenticateToken, userRoute);
+app.use('/api/recipe',authenticateToken, recipeRoute);
 app.use('/api/category', categoryRoute);
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
