@@ -43,7 +43,7 @@ app.use(responseLogger); // will print the return values in the console
 // Routers
 app.use('/auth', authenticationRoute );
 app.use('/api/user',authenticateToken, userRoute);
-app.use('/api/recipe',authenticateToken, recipeRoute);
+app.use('/api/recipe', recipeRoute);
 app.use('/api/category', categoryRoute);
 
 

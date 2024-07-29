@@ -102,6 +102,7 @@ export const AddTileComponent = () => {
                             <option value="Boeuf">Boeuf</option>
                             <option value="Poisson">Poisson</option>
                             <option value="Salade">Salade</option>
+                            <option value="Salade">Dessert</option>
                             </select>
                         </div>
                         <div className="form-group">

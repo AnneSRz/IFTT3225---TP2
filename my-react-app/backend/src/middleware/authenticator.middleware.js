@@ -18,6 +18,7 @@ const authenticateToken = (req, res, next) => {
         //
         //console.log(user.username)
         req.user = user.username; //we add information to the request
+        console.log(req.params.id)
         next();        // next middleware
     });
 };

@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
+import { AuthContext } from '../App';
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 
-const TileComponent = ({ recipe, onDeleteRecipe }) => {
+
+const TileComponent = ({ recipe }) => {
+
+    //is user connected
+    const { token } = useContext(AuthContext);
+    const { setToken } = useContext(AuthContext);
+
+
   /* keys from the recipe parameter (JSON)
       title
       recipeImagesURL
@@ -46,13 +54,34 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
     setEditedRecipe({ ...editedRecipe, [name]: value });
   };
 
-  const handleSaveClick = () => {
-    setEditOverlay(false);
+  const handleConfirmSaveClick = () => {
+    //
+    fetch(`http://localhost:3000/api/recipe/${recipe.title}`, {
+      method: 'PUT',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `${token.token}`
+    },
+      body: JSON.stringify(editedRecipe)
+    })
+      .then(response =>  response.json()     )
+      .then(data => {   console.log('Updated:', data);        })
+      .catch(error =   console.error('Error:', error)           );
+    handleCloseClick;
   };
 
   const handleConfirmDeleteClick = () => {
-    onDeleteRecipe(recipe);
-    setDeleteOverlay(false);
+    fetch(`http://localhost:3000/api/recipe/${recipe.title}`,{
+      method: 'DELETE',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `${token.token}`
+        },
+    })
+      .then(response => response.json())
+      .then(data => {            console.log('Deleted:', data);        })
+      .catch(error => console.error('Error:', error));
+    handleCloseClick;
   };
 
   const divStyle = {
@@ -60,6 +89,12 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
     backgroundColor: 'white',
     borderRadius: '5px',
     display: 'inline-block',
+    position: 'relative',
+    width: '300px', 
+    height: '400px', 
+    overflow: 'hidden',
+    padding: '10px',
+    margin: '10px'
   };
 
   return (
@@ -79,13 +114,18 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
 
           <h4 className="mt-3 mb-2 nom-tuile">{recipe.title}</h4>
 
-          <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" style={{ width: '20%', height: '20%', objectFit: 'cover' }} />
+          <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" style={{
+              width: '100%',
+              height: '200px',
+              objectFit: 'cover',
+              borderRadius: '8px'
+            }} />
           <div className="mt-3">
             <p className="prep-tuile">
               <strong>Temps de préparation:</strong> {recipe.preparationTime} min
             </p>
             <p className="type-tuile">
-              <strong>Type : </strong> {recipe.tags.join(', ')}
+              <strong>Type : </strong> {recipe.category}
             </p>
           </div>
         </div>
@@ -116,7 +156,7 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
                   <strong>Temps de Cuisson:</strong> {recipe.cookingTime} min
                 </p>
                 <p className="type-tuile">
-                  <strong>Type : </strong> {recipe.tags.join(', ')}
+                  <strong>Type : </strong> {recipe.category}
                 </p>
                 <p className="description-fiche">{recipe.description}</p>
               </div>
@@ -161,6 +201,7 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
                       <option value="Boeuf">Boeuf</option>
                       <option value="Poisson">Poisson</option>
                       <option value="Salade">Salade</option>
+                      <option value="Salade">Dessert</option>
                     </select>
                   </div>
                   <div className="form-group">
@@ -170,7 +211,7 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
                 </form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-primary" onClick={handleSaveClick}>Sauvegarder</button>
+                <button type="button" className="btn btn-primary" onClick={handleConfirmSaveClick}>Sauvegarder</button>
                 <button type="button" className="btn btn-secondary" onClick={handleCloseClick}>Fermer</button>
               </div>
             </div>

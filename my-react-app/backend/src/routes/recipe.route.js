@@ -1,21 +1,21 @@
 const express = require('express');
 const RecipeController = require('../controllers/recipe.controller');
-
+const { authenticateToken } = require('../middleware/authenticator.middleware');
 const router = express.Router();
 
 // Route: GET all recipes
 router.get('/', RecipeController.getAllRecipes);
 
 // Route: GET recipe by ID
-router.get('/:id', RecipeController.getRecipeById);
+router.get('/:id',authenticateToken, RecipeController.getRecipeById);
 
 // Route: POST create a new recipe
-router.post('/', RecipeController.createRecipe);
+router.post('/',authenticateToken, RecipeController.createRecipe);
 
 // Route: PUT update recipe by ID
-router.put('/:id', RecipeController.updateRecipe);
+router.put('/:id',authenticateToken, RecipeController.updateRecipe);
 
 // Route: DELETE recipe by ID
-router.delete('/:id', RecipeController.deleteRecipe);
+router.delete('/:id',authenticateToken, RecipeController.deleteRecipe);
 
 module.exports =  router;
