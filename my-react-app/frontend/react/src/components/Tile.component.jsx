@@ -207,7 +207,7 @@ const TileComponent = ({ recipe }) => {
                       <option value="Boeuf">Boeuf</option>
                       <option value="Poisson">Poisson</option>
                       <option value="Salade">Salade</option>
-                      <option value="Salade">Dessert</option>
+                      <option value="Dessert">Dessert</option>
                     </select>
                   </div>
                   <div className="form-group">
