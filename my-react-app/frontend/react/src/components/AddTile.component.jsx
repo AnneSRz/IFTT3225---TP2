@@ -30,11 +30,14 @@ export const AddTileComponent = () => {
   const handleSubmit=()=>{
     // Send the POST request using fetch
     console.log(JSON.stringify(recipe))
+    console.log(token)
     fetch('http://localhost:3000/api/recipe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `${token.token}`
+        },
         body: JSON.stringify(recipe),
-        Authorization: `${token}`,
     })
     .then(response => {
         if (!response.ok) {

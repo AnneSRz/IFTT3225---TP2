@@ -9,8 +9,8 @@ const recipeSchema = new Schema({
         unique: true
     },
     recipeImagesURL: {
-        type: [String],
-        default: []
+        type: String,
+        default: ''
     },
     author: {
         type: String,

@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 
 
 dotenv.config();
-const SECRET_KEY = process.env.JWT_SECRET; // .env key
+const SECRET_KEY = process.env.HASH_KEY; // .env key
 
 /* Logique extraite des diapos sur mern */
 
@@ -28,9 +28,9 @@ exports.login = async (req, res) => {
 
         // Generate JWT token
         const token = jwt.sign(
-            { userId: user._id, email: user.email },
-            SECRET_KEY,
-            { expiresIn: '1h' }
+            { username: user.username, email: user.email }, //payload
+            SECRET_KEY, //key
+            { expiresIn: '1h' } //options
         );
 
         res.status(200).json({ token });
@@ -66,24 +66,4 @@ exports.signup = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
     }
-};
-
-
-// Middleware to check Fcation
-exports.verifyToken = (req, res, next) => {
-    const token = req.headers['authorization']?.split(' ')[1]; // Assuming Bearer token
-
-    if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
-    }
-
-    jwt.verify(token, SECRET_KEY, (err, decoded) => {
-        if (err) {
-            return res.status(401).json({ message: 'Invalid token' });
-        }
-
-        // Attach user information to request object
-        req.user = decoded;
-        next(); // Proceed to the next middleware or route handler
-    });
 };
