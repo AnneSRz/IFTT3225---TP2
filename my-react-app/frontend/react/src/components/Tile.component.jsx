@@ -118,7 +118,7 @@ const TileComponent = ({ recipe }) => {
               width: '100%',
               height: '200px',
               objectFit: 'cover',
-              borderRadius: '8px'
+              borderRadius: '5px'
             }} />
           <div className="mt-3">
             <p className="prep-tuile">
@@ -147,7 +147,12 @@ const TileComponent = ({ recipe }) => {
 
               {/* Body de info overlay */}
               <div className="modal-body">
-                <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" style={{ width: '20%', height: '20%', objectFit: 'cover' }}/>
+                <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                  borderRadius: '5px'
+                  }} />
                 <h4 className="mt-3 mb-2 nom-tuile">{recipe.title}</h4>
                 <p className="prep-tuile">
                   <strong>Temps de préparation:</strong> {recipe.preparationTime} min
@@ -241,6 +246,12 @@ const TileComponent = ({ recipe }) => {
           </div>
         </div>
       )}
+
+      {/* Partie pour afficher seulement 15 éléments par page*/}
+
+
+
+
     </div>
   );
 }

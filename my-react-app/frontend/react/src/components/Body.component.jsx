@@ -19,7 +19,34 @@ export default function BodyComponent() {
 
    //hook
     const [recipes, setRecipes] = useState( [] );
+    const [pageCourante, setPageCourante] = useState(1);
+    const itemsParPage = 15; 
     
+
+    const paginationStyles = {
+        container: {
+            marginTop: '20px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%'
+        },
+        button: {
+            border: '1px solid #ddd',
+            padding: '10px',
+            margin: '0 5px',
+            cursor: 'pointer',
+            backgroundColor: 'white',
+            borderRadius: '4px',
+            fontSize: '16px'
+        },
+        activeButton: {
+            backgroundColor: '#007bff',
+            color: 'white'
+        }
+    };
+
+
     //Aller chercher toutes les recettes dans la database
     useEffect(() => {
         fetch('http://localhost:3000/api/recipe')
@@ -29,17 +56,43 @@ export default function BodyComponent() {
     },
     []);
 
+    // Calculer les recettes à afficher pour la page actuelle
+    const indexOfLastRecipe = pageCourante * itemsParPage;
+    const indexOfFirstRecipe = indexOfLastRecipe - itemsParPage;
+    const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+    // Fonction pour changer de page
+    const paginate = (pageNumber) => setPageCourante(pageNumber);
+
+    // Nombre total de pages
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(recipes.length / itemsParPage); i++) {
+        pageNumbers.push(i);
+    }
+
+
+
 
     
     return (
-        <div className="d-flex justify-content-center align-items-center" style={{ height: '100%' }}>
+        <div className="d-flex flex-column align-items-center" style={{ height: '100%' }}>
+            <div className="d-flex flex-wrap justify-content-center">
         
-        {recipes.map(e => (
-                <TileComponent
-                key={e.title}
-                recipe={e}
-                />
-            ))}
+                {currentRecipes.map(e => (
+                        <TileComponent
+                        key={e.title}
+                        recipe={e}
+                        />
+                ))}
+            </div>
+
+            <div style={paginationStyles.container}>
+                {pageNumbers.map(number => (
+                    <button key={number} onClick={() => paginate(number)} className={`page-item ${pageCourante === number ? 'active' : ''}`}>
+                        {number}
+                    </button>
+                ))}
+            </div>
 
         </div>
     );
