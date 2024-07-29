@@ -23,25 +23,23 @@ export default function BodyComponent() {
     const itemsParPage = 15; 
     
 
-    const paginationStyles = {
+    const styleBooton = {
         container: {
-            marginTop: '20px',
+            margin: '20px',
+            padding : '10px',
             display: 'flex',
+            width: '100%',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%'
-        },
-        button: {
-            border: '1px solid #ddd',
+
+        },button: {
+            border: '1px solid',
             padding: '10px',
-            margin: '0 5px',
-            cursor: 'pointer',
             backgroundColor: 'white',
-            borderRadius: '4px',
-            fontSize: '16px'
-        },
-        activeButton: {
-            backgroundColor: '#007bff',
+            borderRadius: '5px',
+
+        },activeButton: {
+            backgroundColor: 'blue',
             color: 'white'
         }
     };
@@ -62,15 +60,15 @@ export default function BodyComponent() {
         return () => clearInterval(interval);
     }, []);
 
-    // Calculer les recettes à afficher pour la page actuelle
+    // Afficher 15 recettes par page
     const indexOfLastRecipe = pageCourante * itemsParPage;
     const indexOfFirstRecipe = indexOfLastRecipe - itemsParPage;
     const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
-    // Fonction pour changer de page
-    const paginate = (pageNumber) => setPageCourante(pageNumber);
+    // Ici pour changer la page dependamment du nombre de receete
+    const paginate = (numPage) => setPageCourante(numPage);
 
-    // Nombre total de pages
+    // Pis le nombre de pages
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(recipes.length / itemsParPage); i++) {
         pageNumbers.push(i);
@@ -78,8 +76,6 @@ export default function BodyComponent() {
 
 
 
-
-    
     return (
         <div className="d-flex flex-column align-items-center" style={{ height: '100%' }}>
             <div className="d-flex flex-wrap justify-content-center">
@@ -92,10 +88,10 @@ export default function BodyComponent() {
                 ))}
             </div>
 
-            <div style={paginationStyles.container}>
-                {pageNumbers.map(number => (
-                    <button key={number} onClick={() => paginate(number)} className={`page-item ${pageCourante === number ? 'active' : ''}`}>
-                        {number}
+            <div style={styleBooton.container}>
+                {pageNumbers.map(nombre => (
+                    <button key={nombre} onClick={() => paginate(nombre)} className={`page-item ${pageCourante === nombre ? 'active' : ''}`}>
+                        {nombre}
                     </button>
                 ))}
             </div>
