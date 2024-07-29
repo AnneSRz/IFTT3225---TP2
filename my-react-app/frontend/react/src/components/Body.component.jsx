@@ -48,13 +48,19 @@ export default function BodyComponent() {
 
 
     //Aller chercher toutes les recettes dans la database
-    useEffect(() => {
+    const fetchRecipes = () => {
         fetch('http://localhost:3000/api/recipe')
         .then(response => response.json())
         .then(data => setRecipes(data))
         .catch(error => console.error("Les recettes n'ont pas pu être obtenues", error));
-    },
-    []);
+    }
+
+
+    useEffect(() => {
+        fetchRecipes();
+        const interval = setInterval(fetchRecipes, 5000); // Poll every 5 seconds
+        return () => clearInterval(interval);
+    }, []);
 
     // Calculer les recettes à afficher pour la page actuelle
     const indexOfLastRecipe = pageCourante * itemsParPage;
