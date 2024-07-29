@@ -80,7 +80,27 @@ class RecipeController {
             res.status(500).json({ message: err.message + ":(" });
         }
     }
+
+    // GET recipe by ID
+    async  getRecipeByFilter(req, res) {
+        try {
+            console.log(req.params.id)
+            const search = req.params.id; 
+            const regex = new RegExp(search, 'i'); // Create a regex for case-insensitive search
+            const recipes = await Recipe.find({ title: { $regex: regex } });
+            
+            if (!recipes) {
+                res.status(404).json({ message: 'Recipe not found' });
+                return;
+            }
+            res.json(recipes);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    }
+
 }
+
 
 
 module.exports = new RecipeController();

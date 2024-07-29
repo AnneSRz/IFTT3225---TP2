@@ -136,7 +136,7 @@ const TileComponent = ({ recipe }) => {
 
       {/* Afficher les informations de la recette lorsque l'user clique sur la tuile */}
       {showInfoOverlay && (
-        <div className="modal fade show" id="tuileRecetteModal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+        <div className="modal fade show" id="tuileRecetteModal" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document">
             <div className="modal-content">
 
@@ -173,9 +173,10 @@ const TileComponent = ({ recipe }) => {
 
       {/* Modifier les infos de la recette lorsque le user clique sur Icon crayon */}
       {showEditOverlay && (
-        <div className="modal fade show" id="editModal" aria-hidden="true" style={{ display: 'block' }}>
+        <div className="modal fade show" id="editModal"  style={{ display: 'block' }}>
           <div className="modal-dialog" role="document">
             <div className="modal-content">
+              
               <div className="modal-header">
                 <h5 className="modal-title" id="editModalLabel">Modifier la recette</h5>
                 <button type="button" className="close" aria-label="Close" onClick={handleCloseClick}>
@@ -200,7 +201,7 @@ const TileComponent = ({ recipe }) => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="type">Type</label>
-                    <select className="form-control" id="type" name="tags" placeholder={editedRecipe.category} onChange={handleInputChange}>
+                    <select className="form-control" id="type" name="category" placeholder={editedRecipe.category} onChange={handleInputChange}>
                       <option value="Végétarien">Végétarien</option>
                       <option value="Végétalien">Végétalien</option>
                       <option value="Poulet">Poulet</option>

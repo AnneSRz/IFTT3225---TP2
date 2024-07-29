@@ -9,6 +9,9 @@ router.get('/', RecipeController.getAllRecipes);
 // Route: GET recipe by ID
 router.get('/:id',authenticateToken, RecipeController.getRecipeById);
 
+// Route: GET (SEARCH) recipe by ID
+router.get('/search/:id', RecipeController.getRecipeByFilter);
+
 // Route: POST create a new recipe
 router.post('/',authenticateToken, RecipeController.createRecipe);
 
