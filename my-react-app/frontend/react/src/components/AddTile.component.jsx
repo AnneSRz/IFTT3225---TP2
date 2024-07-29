@@ -40,10 +40,10 @@ export const AddTileComponent = () => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        return response.json(); // Parse the JSON from the response
+        return response.json(); // Parse the JSON de la repoonse
     })
     .then(data => {
-        console.log('Recette ajoutee:', data); // Handle the response data
+        console.log('Recette ajoutee:', data); // Handle donnée de réponse
     })
     .catch(error => {
         console.error('Erreur lors de la creation de la recette:', error); // Handle any errors

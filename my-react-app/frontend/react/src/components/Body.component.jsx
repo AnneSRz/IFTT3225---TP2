@@ -21,18 +21,29 @@ export default function BodyComponent() {
     const [del, setDel] = useState(false);
 
     //Aller chercher les recettes dans la database
+    /*
     useEffect(() => {
-        fetch('https://localhost:3000/recettes')
+        fetch('https://localhost:3000/')
         .then(response => response.json())
-        .then(data => setRecipes(data))
+        .then(data => setRecipes(mockData))
         .catch(error => console.error('Les recettes n<ont pas pu être obtenues', error));
     },
     []);
+    */
+    useEffect(() => {
+        // Replace with mock data
+        const mockData = [
+            { id: 1, title: 'Mock Recipe 1', recipeImagesURL: "https://mykoreankitchen.com/wp-content/uploads/2007/01/1.-Tuna-Kimbap-Recipe.jpg", cookingTime: '10', preparationTime: '5', tags: ['tag1'] },
+            { id: 2, title: 'Mock Recipe 2', cookingTime: '10', preparationTime: '5', tags: ['tag1'] },
+            // Add more mock recipes if needed
+        ];
+        setRecipes(mockData);
+    }, []);
 
 
     useEffect(() => {
         if (del) {
-            fetch('https://localhost:3000/recettes' + del, { method: 'DELETE' })
+            fetch('https://localhost:3000/' + del, { method: 'DELETE' })
                 .then(response => response.json())
                 .then(() => {
                     setRecipes(recipes.filter(recipe => recipe.id !== del));

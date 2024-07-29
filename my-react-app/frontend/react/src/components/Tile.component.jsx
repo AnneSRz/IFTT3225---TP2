@@ -76,8 +76,10 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
 
         {/* On met les infos pertinent de la recette ici */}
         <div className="titre-recette" data-toggle="modal" data-target="#tuileRecetteModal" onClick={handleInfoClick}>
+
           <h4 className="mt-3 mb-2 nom-tuile">{recipe.title}</h4>
-          <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" />
+
+          <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" style={{ width: '20%', height: '20%', objectFit: 'cover' }} />
           <div className="mt-3">
             <p className="prep-tuile">
               <strong>Temps de préparation:</strong> {recipe.preparationTime} min
@@ -94,6 +96,7 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
         <div className="modal fade show" id="tuileRecetteModal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document">
             <div className="modal-content">
+
               {/* Header de info overlay */}
               <div className="modal-header">
                 <h5 className="modal-title" id="tuileRecetteModal">Détails de la recette</h5>
@@ -101,9 +104,10 @@ const TileComponent = ({ recipe, onDeleteRecipe }) => {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+
               {/* Body de info overlay */}
               <div className="modal-body">
-                <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" />
+                <img src={recipe.recipeImagesURL} alt="Image de la recette" className="image-tuile" style={{ width: '20%', height: '20%', objectFit: 'cover' }}/>
                 <h4 className="mt-3 mb-2 nom-tuile">{recipe.title}</h4>
                 <p className="prep-tuile">
                   <strong>Temps de préparation:</strong> {recipe.preparationTime} min
