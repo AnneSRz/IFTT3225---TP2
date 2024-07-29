@@ -55,7 +55,8 @@ class RecipeController {
     // PUT update recipe by ID
     async  updateRecipe(req, res) {
         try {
-            const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            console.log(req.params)
+            const updatedRecipe = await Recipe.findOneAndUpdate({ title:req.params.id },req.body,{ new: true });
             if (!updatedRecipe) {
                 res.status(404).json({ message: 'Recipe not found' });
                 return;
@@ -69,7 +70,7 @@ class RecipeController {
     // DELETE recipe by ID
     async  deleteRecipe(req, res) {
         try {
-            const deletedRecipe = await Recipe.findByIdAndDelete(req.params.id);
+            const deletedRecipe = await Recipe.findOneAndDelete(req.params.id);
             if (!deletedRecipe) {
                 res.status(404).json({ message: 'Recipe not found' });
                 return;

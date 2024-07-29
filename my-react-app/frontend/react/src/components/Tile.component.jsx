@@ -51,11 +51,14 @@ const TileComponent = ({ recipe }) => {
   // Pour changer les infos d'une recette. 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditedRecipe({ ...editedRecipe, [name]: value });
+    if(name && value){
+      editedRecipe[name]= value
+    }
   };
 
   const handleConfirmSaveClick = () => {
     //
+    console.log(editedRecipe)
     fetch(`http://localhost:3000/api/recipe/${recipe.title}`, {
       method: 'PUT',
       headers: { 
@@ -66,7 +69,7 @@ const TileComponent = ({ recipe }) => {
     })
       .then(response =>  response.json()     )
       .then(data => {   console.log('Updated:', data);        })
-      .catch(error =   console.error('Error:', error)           );
+      .catch(error =>   console.error('Error:', error)           );
     handleCloseClick;
   };
 
@@ -140,9 +143,7 @@ const TileComponent = ({ recipe }) => {
               {/* Header de info overlay */}
               <div className="modal-header">
                 <h5 className="modal-title" id="tuileRecetteModal">Détails de la recette</h5>
-                <button type="button" className="close" aria-label="Close" onClick={handleCloseClick}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" className="close" aria-label="Close" onClick={handleCloseClick}>x</button>
               </div>
 
               {/* Body de info overlay */}
@@ -187,19 +188,19 @@ const TileComponent = ({ recipe }) => {
                 <form>
                   <div className="form-group">
                     <label htmlFor="nomRecette">Nom </label>
-                    <input type="text" className="form-control" id="nomRecette" name="title" value={editedRecipe.title} onChange={handleInputChange} />
+                    <input type="text" className="form-control" id="nomRecette" name="title" placeholder={editedRecipe.title} onChange={handleInputChange} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="tempsPrep">Temps de préparation</label>
-                    <input type="text" className="form-control" id="tempsPrep" name="preparationTime" value={editedRecipe.preparationTime} onChange={handleInputChange} />
+                    <input type="text" className="form-control" id="tempsPrep" name="preparationTime" placeholder={editedRecipe.preparationTime} onChange={handleInputChange} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="tempsCook">Temps de cuisson</label>
-                    <input type="text" className="form-control" id="tempsCook" name="cookingTime" value={editedRecipe.cookingTime} onChange={handleInputChange} />
+                    <input type="text" className="form-control" id="tempsCook" name="cookingTime" placeholder={editedRecipe.cookingTime} onChange={handleInputChange} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="type">Type</label>
-                    <select className="form-control" id="type" name="tags" value={editedRecipe.tags.join(', ')} onChange={handleInputChange}>
+                    <select className="form-control" id="type" name="tags" placeholder={editedRecipe.category} onChange={handleInputChange}>
                       <option value="Végétarien">Végétarien</option>
                       <option value="Végétalien">Végétalien</option>
                       <option value="Poulet">Poulet</option>
@@ -211,7 +212,7 @@ const TileComponent = ({ recipe }) => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="description">Étape de la recette</label>
-                    <textarea className="form-control" id="description" name="description" value={editedRecipe.description} onChange={handleInputChange} />
+                    <textarea className="form-control" id="description" name="description" placeholder={editedRecipe.description} onChange={handleInputChange} />
                   </div>
                 </form>
               </div>
