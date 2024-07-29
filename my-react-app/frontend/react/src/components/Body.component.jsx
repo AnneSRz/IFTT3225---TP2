@@ -31,11 +31,13 @@ export default function BodyComponent() {
             width: '100%',
             justifyContent: 'center',
             alignItems: 'center',
+
         },button: {
             border: '1px solid',
             padding: '10px',
             backgroundColor: 'white',
             borderRadius: '5px',
+
         },activeButton: {
             backgroundColor: 'blue',
             color: 'white'
